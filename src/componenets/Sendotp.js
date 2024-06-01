@@ -4,18 +4,19 @@ import 'react-phone-input-2/lib/style.css';
 import { MdOutlineMobileFriendly } from "react-icons/md";
 import { auth } from "../firebase/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import '../App.scss';
 
 
 function SendOtp() {
     const [num, setNum] = useState('');
-    const [status, setStatus] = useState("");
+    const navigate = useNavigate();
     const sendOtp = async () => {
         try {
             const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
             const confirmation = await signInWithPhoneNumber(auth, num, recaptcha);
-            setStatus(confirmation);
             console.log(confirmation);
+            navigate('/verifyotp');
         } catch (err) {
             console.log(err);
         }
