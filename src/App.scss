@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+//Variables
+$textColor: #EEE7CE;
+$boxShadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+$cardPadding: 20px;
+$borderRadius: 10px;
+$btnBg: #064439;
+$btnBgHover: #053129;
+$btnRadius: 8px;
+$btnPadding: 10px 15px;
+$iconWidth: 150px;
+$iconHeight: 150px;
+
+// Functions
+@mixin flex ($height: 0) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $height;
+}
+
+@mixin btn() {
+    color: $textColor;
+    background-color: $btnBg;
+    border-radius: $btnRadius;
+    padding: $btnPadding;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0px;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+@mixin btnHover() {
+    background-color: $btnBgHover ;
+    transition: background-color 1s ease;
+}
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: Quicksand;
+}
+
+.mainSendOtp {
+    @include flex(100vh);
+
+    .sendOtpContainer {
+        max-width: 400px;
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-items: center;
+        display: $borderRadius;
+        box-shadow: $boxShadow;
+        padding: $cardPadding;
+        border-radius: $borderRadius;
+    }
+
+    .icon {
+        width: $iconWidth;
+        height: $iconHeight;
+    }
+
+    #recaptcha {
+        box-shadow: $boxShadow;
+    }
+
+    button {
+        @include btn();
+
+        &:hover {
+            @include btnHover();
+        }
+    }
+
+    .react-tel-input .country-list {
+        box-shadow: $boxShadow ;
+    }
+}

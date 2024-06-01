@@ -1,10 +1,10 @@
 import './App.scss';
+import SendOtp from './componenets/Sendotp';
 
 function MainApp() {
   return (
     <div className="App">
-      <h1>Muhammad Farooq</h1>
-
+      <SendOtp />
     </div>
   );
 }
