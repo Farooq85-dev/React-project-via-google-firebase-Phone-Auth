@@ -5,20 +5,24 @@ import { MdOutlineMobileFriendly } from "react-icons/md";
 import { auth } from "../firebase/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useConfirmation } from './Confirmation';
 import '../App.scss';
-
+import toast from 'react-hot-toast';
 
 function SendOtp() {
-    const [num, setNum] = useState('');
     const navigate = useNavigate();
+    const [num, setNum] = useState('');
+    const { setConfirmation } = useConfirmation();
+
     const sendOtp = async () => {
         try {
             const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
             const confirmation = await signInWithPhoneNumber(auth, num, recaptcha);
-            console.log(confirmation);
+            toast.success('Congratulations! Please Check Your Inbox.');
+            setConfirmation(confirmation);
             navigate('/verifyotp');
         } catch (err) {
-            console.log(err);
+            toast.error('OOPS! Please Try Again.');
         }
     }
     return (
