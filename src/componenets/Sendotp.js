@@ -15,6 +15,10 @@ function SendOtp() {
     const { setConfirmation } = useConfirmation();
 
     const sendOtp = async () => {
+        if (!num || num.length < 10) {
+            toast.error('Please enter a phone number.');
+            return;
+        }
         try {
             const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
             const confirmation = await signInWithPhoneNumber(auth, num, recaptcha);

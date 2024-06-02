@@ -2,10 +2,12 @@ import OtpInput from 'react-otp-input';
 import { useState } from 'react';
 import { MdMessage } from 'react-icons/md';
 import { useConfirmation } from './Confirmation';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import '../App.scss'
 
 function VerifyOtp({ data }) {
+    const navigate = useNavigate();
     const [otp, setOtp] = useState('');
     const { confirmation } = useConfirmation();
 
@@ -14,6 +16,9 @@ function VerifyOtp({ data }) {
             if (confirmation) {
                 await confirmation.confirm(otp);
                 toast.success('Congratulations! OTP Verified Successfully.');
+                setTimeout(()=>{
+                    navigate('/sendotp');
+                },2000)
             } else {
                 toast.error('OOPS! No OTP Found.');
             }
